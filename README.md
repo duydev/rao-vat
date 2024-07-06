@@ -4,10 +4,17 @@ Một dự án trang tin rao vặt đơn giản để luyện tập sử dụng 
 
 ## Tech stack
 
-- Backend: Go
-- Frontend: Next.js
-- DB: Firestore (Firebase)
-- Cloud platform: Firebase, Vercel
+### Backend
+
+    - Language: Go
+    - Cloud platform: GCP, deploy on Cloud Run
+    - DB: Firestore (Firebase)
+
+### Frontend
+
+    - Language: Javascript
+    - Framework: Next.js
+    - Cloud platform: Vercel
 
 ## Features
 
