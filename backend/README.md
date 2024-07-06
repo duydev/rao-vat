@@ -1,16 +1,10 @@
-## Auth docker repo
+# Backend
 
-gcloud auth configure-docker asia-southeast1-docker.pkg.dev
+## Commands
 
-## Build image
-
-docker build -t rao-vat .
-
-## Push to GCP
-
-docker tag rao-vat asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
-docker push asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
-
-## Deploy cloud run
-
-gcloud run deploy --image asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat --platform managed --region asia-southeast1
+    - make dev : Run app with watch mode
+    - make build : Build to execute app
+    - make test : Test all unit test
+    - make deploy : Deploy to Google Cloud Run
+    - make clean : Remove built app
+    - make run : Build & Run app
