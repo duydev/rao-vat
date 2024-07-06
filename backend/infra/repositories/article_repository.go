@@ -4,9 +4,50 @@ import (
 	"duydev.io.vn/rao-vat/app/domains"
 	"duydev.io.vn/rao-vat/infra/database"
 	"github.com/mitchellh/mapstructure"
+	"google.golang.org/api/iterator"
 )
 
-func GetAll() {}
+func toEntity(data map[string]interface{}) (*domains.Article, error) {
+	var entity domains.Article
+
+	err := mapstructure.Decode(data, &entity)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entity, nil
+}
+
+func GetAll() ([]domains.Article, error) {
+	ctx, db := database.GetDBInstance()
+
+	iter := db.Collection("articles").Documents(ctx)
+
+	res := []domains.Article{}
+
+	for {
+		docSnapshot, err := iter.Next()
+
+		if err == iterator.Done {
+			break
+		}
+
+		if err != nil {
+			return nil, err
+		}
+
+		entity, err := toEntity(docSnapshot.Data())
+		if err != nil {
+			return nil, err
+		}
+
+		entity.Id = docSnapshot.Ref.ID
+
+		res = append(res, *entity)
+	}
+
+	return res, nil
+}
 
 func Get() {}
 
