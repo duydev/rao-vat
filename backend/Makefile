@@ -36,4 +36,7 @@ deploy:
 		docker push asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
 		gcloud run deploy --image asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat --platform managed --region asia-southeast1
 
+dev:
+		gow run .
+
 default: all
