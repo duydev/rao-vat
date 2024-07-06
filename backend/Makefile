@@ -35,7 +35,7 @@ deploy:
 		docker build -t duydev.io.vn/rao-vat .
 		docker tag duydev.io.vn/rao-vat asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
 		docker push asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
-		gcloud run deploy --image asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat --platform managed --region asia-southeast1
+		gcloud run deploy rao-vat --image asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat --platform managed --region asia-southeast1
 
 dev:
 		gow run ${ENTRYPOINT}
