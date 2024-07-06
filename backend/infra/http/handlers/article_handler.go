@@ -3,6 +3,8 @@ package handlers
 import (
 	"net/http"
 
+	"duydev.io.vn/rao-vat/app/domains"
+	usecases "duydev.io.vn/rao-vat/app/usecases/article"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +15,13 @@ func NewArticleHandler() *ArticleHandler {
 }
 
 func (h ArticleHandler) GetAll(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{"message": "Ok"})
+	articles, err := usecases.GetAllArticlesUsecase()
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"data": articles})
 }
 
 func (h ArticleHandler) Get(ctx *gin.Context) {
@@ -21,7 +29,21 @@ func (h ArticleHandler) Get(ctx *gin.Context) {
 }
 
 func (h ArticleHandler) Create(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{"message": "Ok"})
+	var article domains.Article
+
+	if err := ctx.BindJSON(&article); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+		return
+	}
+
+	createdArticle, err := usecases.CreateArticleUsecase(article)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"data": createdArticle})
 }
 
 func (h ArticleHandler) Update(ctx *gin.Context) {
