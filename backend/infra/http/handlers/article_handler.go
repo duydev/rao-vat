@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"duydev.io.vn/rao-vat/app/domains"
+	usecases "duydev.io.vn/rao-vat/app/usecases/article"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,14 +25,19 @@ func (h ArticleHandler) Get(ctx *gin.Context) {
 func (h ArticleHandler) Create(ctx *gin.Context) {
 	var article domains.Article
 
-	err := ctx.BindJSON(&article)
+	if err := ctx.BindJSON(&article); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
+		return
+	}
+
+	createdArticle, err := usecases.CreateArticleUsecase(article)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"message": "Ok"})
+	ctx.JSON(http.StatusOK, gin.H{"message": "Ok", "article": createdArticle})
 }
 
 func (h ArticleHandler) Update(ctx *gin.Context) {
