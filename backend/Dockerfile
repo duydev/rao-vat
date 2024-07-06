@@ -2,10 +2,14 @@ FROM golang:1.22.5 as builder
 
 WORKDIR /app
 
-COPY . .
+COPY go.mod .
+COPY go.sum .
 
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -o www .
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o www ./cmd
 
 FROM alpine:latest
 

@@ -8,3 +8,4 @@
     - make deploy : Deploy to Google Cloud Run
     - make clean : Remove built app
     - make run : Build & Run app
+    - make deps : Install missing dependencies

@@ -1,11 +1,12 @@
-package main
+package http
 
 import (
-	"duydev.io.vn/rao-vat/handlers"
+	"duydev.io.vn/rao-vat/infra/http/handlers"
+
 	"github.com/gin-gonic/gin"
 )
 
-func setupRouter() *gin.Engine {
+func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
 	healthCheckHandler := handlers.NewHealthCheckHandler()
@@ -23,10 +24,4 @@ func setupRouter() *gin.Engine {
 	articleGroup.DELETE("/:id", articleHandler.Delete)
 
 	return r
-}
-
-func main() {
-	r := setupRouter()
-
-	r.Run(":8080")
 }
