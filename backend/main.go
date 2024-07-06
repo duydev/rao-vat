@@ -1,19 +1,23 @@
 package main
 
 import (
-	"net/http"
-
+	"duydev.io.vn/rao-vat/handlers"
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
+func setupRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/api/health-check", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"ok": true,
-		})
-	})
+	healthCheckHandler := handlers.NewHealthCheckHandler()
 
-	r.Run()
+	apiGroup := r.Group("/api")
+	apiGroup.GET("/health-check", healthCheckHandler.GetAll)
+
+	return r
+}
+
+func main() {
+	r := setupRouter()
+
+	r.Run(":8080")
 }
