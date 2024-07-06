@@ -32,8 +32,8 @@ deps:
 		go mod tidy
 
 deploy:
-		docker build -t rao-vat .
-		docker tag rao-vat asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
+		docker build -t duydev.io.vn/rao-vat .
+		docker tag duydev.io.vn/rao-vat asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
 		docker push asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat
 		gcloud run deploy --image asia-southeast1-docker.pkg.dev/rao-vat-428611/docker-repo/rao-vat --platform managed --region asia-southeast1
 
