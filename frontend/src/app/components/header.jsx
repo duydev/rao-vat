@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import MagnifyingGlass from './MagnifyingGlass';
 import './header.css';
 
@@ -27,18 +28,22 @@ function Header() {
           </ul>
         </div>
         <div className="flex items-center">
-          <div className="text-3xl">RAO VẶT</div>
+          <Link className="text-3xl" href="/">
+            RAO VẶT
+          </Link>
           <div className="p-3 bg-[#d00000] mx-4 my-2 rounded-md grow flex">
             <input
               type="text"
               placeholder="Bạn muốn tìm gì?"
               className="bg-inherit text-md placeholder:text-white w-full"
             />
-            <button className='ml-2'>
+            <button className="ml-2">
               <MagnifyingGlass size={20} />
             </button>
           </div>
-          <button className="bg-[#ff9400] p-2 rounded-md">Đăng tin</button>
+          <Link className="bg-[#ff9400] p-2 rounded-md" href="dang-tin">
+            Đăng tin
+          </Link>
         </div>
       </div>
       <div className="bg-[#d00000]">
