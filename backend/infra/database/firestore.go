@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"log"
+	"os"
 
 	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go"
@@ -21,7 +22,13 @@ func GetDBInstance() (context.Context, *firestore.Client) {
 	}
 
 	if app == nil {
-		sa := option.WithCredentialsFile("../service_account_private_key.json")
+		keyPath := os.Getenv("FIREBASE_PRIVATE_KEY")
+
+		if keyPath == "" {
+			keyPath = "../service_account_private_key.json"
+		}
+
+		sa := option.WithCredentialsFile(keyPath)
 		app, err = firebase.NewApp(ctx, nil, sa)
 
 		if err != nil {
