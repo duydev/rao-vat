@@ -2,6 +2,8 @@
 
 Một dự án trang tin rao vặt đơn giản để luyện tập sử dụng Go, Next.js
 
+https://rao-vat.vercel.app/
+
 ## Tech stack
 
 ### Backend
