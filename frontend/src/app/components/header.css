@@ -1,0 +1,4 @@
+.separator:not(:last-child)::after {
+  content: '|';
+  margin-left: 10px; /* Khoảng cách từ ký tự '|' tới phần tử tiếp theo */
+}
