@@ -15,7 +15,7 @@ func NewArticleHandler() *ArticleHandler {
 }
 
 func (h ArticleHandler) GetAll(ctx *gin.Context) {
-	articles, err := usecases.GetAllArticlesUsecase()
+	articles, err := usecases.GetAllArticlesUseCase()
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})
@@ -36,7 +36,7 @@ func (h ArticleHandler) Create(ctx *gin.Context) {
 		return
 	}
 
-	createdArticle, err := usecases.CreateArticleUsecase(article)
+	createdArticle, err := usecases.CreateArticleUseCase(article)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Bad request"})

@@ -3,5 +3,9 @@ package http
 func StartServer() {
 	r := SetupRouter()
 
-	r.Run(":8080")
+	err := r.Run(":8080")
+
+	if err != nil {
+		return
+	}
 }

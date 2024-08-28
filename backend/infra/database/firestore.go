@@ -47,9 +47,14 @@ func GetDBInstance() (context.Context, *firestore.Client) {
 	return ctx, db
 }
 
-// Firestore note, no need to call when program exit
+// CloseDBConnection Firestore note, no need to call when program exit
 func CloseDBConnection() {
 	if db != nil {
-		defer db.Close()
+		defer func(db *firestore.Client) {
+			err := db.Close()
+			if err != nil {
+
+			}
+		}(db)
 	}
 }

@@ -5,6 +5,6 @@ import (
 	"duydev.io.vn/rao-vat/infra/repositories"
 )
 
-func GetAllArticlesUsecase() ([]domains.Article, error) {
+func GetAllArticlesUseCase() ([]domains.Article, error) {
 	return repositories.GetAll()
 }
